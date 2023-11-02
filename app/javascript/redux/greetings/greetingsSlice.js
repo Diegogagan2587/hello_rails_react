@@ -3,13 +3,13 @@ import axios from 'axios';
 
 // we get the initial state from the greetings Api
 const getGreetings = createAsyncThunk('greetings/getGreetings', async () => {
-  const response = await axios.get('/api/v1/greetings');
+  const response = await axios.get('http://localhost:3000/api/v1/greetings');
   return response.data;
 });
 
 // we set the initial state
 const initialState = {
-  greetings: [],
+  greetings: ['no greetings yet'],
   status: null,
 };
 
@@ -18,7 +18,7 @@ const greetingsSlice = createSlice({
     name: 'greetings',
     initialState,
     reducers: {},
-    extraReducers(builder): {
+    extraReducers(builder) {
         builder
             .addCase(getGreetings.pending, (state, action) => {
             state.status = 'loading';
