@@ -2,9 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // we get the initial state from the greetings Api
-const getGreetings = createAsyncThunk('greetings/getGreetings', async () => {
-  const response = await axios.get('http://localhost:3000/api/v1/greetings');
-  return response.data;
+export const getGreetings = createAsyncThunk('greetings/getGreetings', async () => {
+    try {
+        const response = await axios.get('http://localhost:3000/api/v1/greetings');
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
 });
 
 // we set the initial state
@@ -21,6 +25,7 @@ const greetingsSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(getGreetings.pending, (state, action) => {
+
             state.status = 'loading';
             })
             .addCase(getGreetings.fulfilled, (state, { payload }) => {
@@ -33,6 +38,5 @@ const greetingsSlice = createSlice({
     }
 });
 
-export { getGreetings };
 export default greetingsSlice.reducer;
 
