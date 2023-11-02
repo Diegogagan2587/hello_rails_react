@@ -4,7 +4,9 @@ import './controllers';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route,  } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './src/redux/store';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Greetings from './components/Greetings';
 
 function App() {
@@ -12,7 +14,7 @@ function App() {
     <>
       <h1>Hello World! from React Component</h1>
       <Routes>
-        <Route path="/" element={<Greetings/>} />
+        <Route path="/" element={<Greetings />} />
       </Routes>
     </>
   );
@@ -21,7 +23,9 @@ function App() {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
