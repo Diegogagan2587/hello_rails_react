@@ -4,22 +4,24 @@ import './controllers';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter, Routes, Route,  } from 'react-router-dom';
+import Greetings from './components/Greetings';
 
 function App() {
-  return <h1>Hello World! from React Component</h1>;
+  return (
+    <>
+      <h1>Hello World! from React Component</h1>
+      <Routes>
+        <Route path="/" element={<Greetings/>} />
+      </Routes>
+    </>
+  );
 }
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-]);
-
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </React.StrictMode>
 );
