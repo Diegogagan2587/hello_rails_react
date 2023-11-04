@@ -4,7 +4,7 @@ class GreetingsController < ApplicationController
     random_greeting_id = Greeting.pluck(:id).sample
     @greeting_random = Greeting.find(random_greeting_id)
 
-    respond_to do | format |
+    respond_to do |format|
       format.html
       format.json { render json: @greeting_random }
       format.xml { render xml: @greeting_random }
